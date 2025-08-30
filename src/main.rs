@@ -17,35 +17,38 @@ fn main() {
         args[5].parse().expect("Invalid integer"),
     ];
 
-    println!("You entered: {:?}", winners);
+    println!("\nThe winning ticket numbers are: {:?}", winners);
 
     // Validate the winning numbers
     if !validate_ticket(&winners) {
         std::process::exit(1);
     }
 
-    // Purchased Lottery Tickets are an array of 10 arrays (or tickets), each containing 6 integers
+    // Purchased PowerBall Tickets are an array of 10 arrays (or tickets), each containing 6 integers
     // The last is the PowerBall (for that ticket)
     let tickets: [[i32; 6]; 10] = [
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
-        [1,2,3,4,5,6],
+        [12,24,43,59,62,18],
+        [12,31,44,51,57,24],
+        [24,37,41,57,67,24],
+        [04,22,23,63,67,21],
+        [04,30,34,48,63,01],
+        [17,23,38,58,69,09],
+        [09,20,34,40,57,09],
+        [08,12,17,41,62,19],
+        [06,08,50,51,64,06],
+        [02,28,36,47,48,02],
         ];
 
-    // Example: print the array
-    println!("Your tickets: {:?}", tickets);
+    // Print each ticket on a separate line
+    println!("\nYour tickets:");
+    tickets.iter().enumerate().for_each(|(n, ticket)| {
+        println!("Ticket {}: {:?}", n+1, ticket);
+    });
 
     // Validate each ticket
     tickets.iter().enumerate().for_each(|(n, ticket)| {
         if !validate_ticket(ticket) {
-            eprintln!("Ticket {} is invalid. It is {:?}", n, ticket);
+            eprintln!("Ticket {} is invalid. It is {:?}", n+1, ticket);
             std::process::exit(1);
         }
     });
@@ -55,10 +58,11 @@ fn main() {
     // Print a the non-zero count of the numbers in each ticket
     // that are also found in the winning ticket
     // Print out the ticket, too.
+    println!("\nResults:");
     tickets.iter().enumerate().for_each(|(n, ticket)| {
         let count = ticket.iter().filter(|&&n| winners.contains(&n)).count();
         if count > 0 {
-            println!("Ticket {} has {} matching numbers. It is {:?}", n, count, ticket);
+            println!("Ticket {} has {} matching numbers.", n+1, count);
         }
     });
 }
