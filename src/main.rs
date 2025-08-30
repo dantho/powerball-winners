@@ -3,7 +3,7 @@ fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
 
     if args.len() != 6 {
-        eprintln!("Please provide the winning numbers as exactly 6 integers.");
+        eprintln!("Please provide exactly 6 integers: the 5 regular numbers followed by 1 PowerBall number.");
         std::process::exit(1);
     }
 
@@ -21,6 +21,7 @@ fn main() {
 
     // Validate the winning numbers
     if !validate_ticket(&winners) {
+        eprintln!("The winning ticket numbers are invalid. They must be 5 unique numbers between 1 and 69, and a PowerBall number between 1 and 26.");
         std::process::exit(1);
     }
 
