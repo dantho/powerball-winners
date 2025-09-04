@@ -63,7 +63,7 @@ fn main() {
     tickets.iter().enumerate().for_each(|(n, ticket)| {
         let count = ticket.iter().filter(|&&n| winners.contains(&n)).count();
         if count > 0 {
-            println!("Ticket {} has {} matching numbers.", n+1, count);
+            println!("Ticket {} has {} matching number{}", n+1, count, if count > 1 { "s" } else { "" });
         }
     });
 }
