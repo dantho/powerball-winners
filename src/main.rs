@@ -62,8 +62,9 @@ fn main() {
     println!("\nResults:");
     tickets.iter().enumerate().for_each(|(n, ticket)| {
         let count = ticket.iter().filter(|&&n| winners.contains(&n)).count();
+        let powerball_match = ticket[5] == winners[5];
         if count > 0 {
-            println!("Ticket {} has {} matching number{}", n+1, count, if count > 1 { "s" } else { "" });
+            println!("Ticket {} has {} matching number{} {}", n+1, count, if count > 1 { "s" } else { "" }, if powerball_match {"including the *PowerBall*"} else {""});
         }
     });
 }
